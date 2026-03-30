@@ -1,24 +1,18 @@
 package com.wanted.crud.service;
 
 import com.wanted.crud.dao.EmployeeDAO;
+import com.wanted.crud.dto.EmployeeDTO;
 import com.wanted.crud.global.JDBCTemplate;
 
 import java.sql.Connection;
-import com.wanted.crud.dto.EmployeeDTO;
-
-
-
-import static com.wanted.crud.global.JDBCTemplate.close;
-import static com.wanted.crud.global.JDBCTemplate.getConnection;
 
 public class EmployeeService {
-    private final EmployeeDAO employeeDAO;
-    private final Connection connection;
-    public EmployeeService(Connection connection) {
-        this.connection = connection;
-        this.employeeDAO = new EmployeeDAO(connection);
-    }
+
+    private final EmployeeDAO employeeDAO = new EmployeeDAO();
+
     public int registerEmployee(EmployeeDTO employee) {
+        Connection connection = JDBCTemplate.getConnection();
+
         try {
             validate(employee);
 
@@ -35,7 +29,17 @@ public class EmployeeService {
             return result;
 
         } finally {
-            close(connection);
+            JDBCTemplate.close(connection);
+        }
+    }
+
+    public int deleteEmployee(String empId) {
+        Connection connection = JDBCTemplate.getConnection();
+
+        try {
+            return employeeDAO.deleteEmployee(connection, empId);
+        } finally {
+            JDBCTemplate.close(connection);
         }
     }
 
@@ -48,17 +52,8 @@ public class EmployeeService {
             throw new IllegalArgumentException("사원명은 필수입니다.");
         }
 
-    public int deleteEmployee(String empId) {
-        Connection con = JDBCTemplate.getConnection();
-
-        int result = employeeDAO.deleteEmployee(con, empId);
-
-        JDBCTemplate.close(con);
-
-        return result;
-    }
         if (employee.getJOB_CODE() == null || employee.getJOB_CODE().isBlank()) {
             throw new IllegalArgumentException("직급코드는 필수입니다.");
         }
     }
-
+}
