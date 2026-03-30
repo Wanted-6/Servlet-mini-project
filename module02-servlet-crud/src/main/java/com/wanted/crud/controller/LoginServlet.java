@@ -17,7 +17,8 @@ public class LoginServlet extends HttpServlet {
         String userId = req.getParameter("userId");
         String userPwd = req.getParameter("userPwd");
 
-        if (("admin".equals(userId) || "user".equals(userId)) && "1234".equals(userPwd)) {
+
+        if (userId != null && !userId.isEmpty() && userPwd != null && !userPwd.isEmpty()) {
 
 
             HttpSession session = req.getSession();
