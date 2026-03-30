@@ -12,13 +12,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@WebServlet("/employeesregister")
-public class EmployeeRegistServlet extends HttpServlet {
-    private final EmployeeService employeeService;
+import static com.wanted.crud.global.JDBCTemplate.getConnection;
 
-    public EmployeeRegistServlet (EmployeeService employeeService) {
-        this.employeeService=employeeService;
-    }
+@WebServlet("/employees/new")
+public class EmployeeRegistServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,7 +27,6 @@ public class EmployeeRegistServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         try {
-            // JSP의 input name 값과 반드시 맞춰야 함
             String empNo = req.getParameter("EMP_NO");
             String empName = req.getParameter("EMP_NAME");
             String email = req.getParameter("EMAIL");
@@ -67,10 +63,11 @@ public class EmployeeRegistServlet extends HttpServlet {
             employee.setHIRE_DATE(hireDate);
             employee.setENT_YN(entYn);
 
+            EmployeeService employeeService = new EmployeeService(getConnection());
             int result = employeeService.registerEmployee(employee);
 
             if (result > 0) {
-                resp.sendRedirect("/index.html");
+                resp.sendRedirect(req.getContextPath() + "/employees");
             } else {
                 req.setAttribute("errorMessage", "사원 등록에 실패했습니다.");
                 req.getRequestDispatcher("/WEB-INF/views/employee/new.jsp").forward(req, resp);

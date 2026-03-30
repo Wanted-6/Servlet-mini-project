@@ -111,7 +111,7 @@
   </div>
   <% } %>
 
-  <form action="${pageContext.request.contextPath}/employeesregister" method="post">
+  <form action="${pageContext.request.contextPath}/employees/new" method="post">
     <div class="form-group">
       <label for="EMP_NO">사번 <span class="required">*</span></label>
       <input type="text" id="EMP_NO" name="EMP_NO" required>

@@ -9,10 +9,10 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Date;
 
-public class EmployeeDAO {
+public class EnrollmentsDAO {
     private final Connection connection;
 
-    public EmployeeDAO(Connection connection) {this.connection = connection;}
+    public EnrollmentsDAO(Connection connection) {this.connection = connection;}
 
     public int insertEmployee(Connection conn, EmployeeDTO employee) {
         String sql = """

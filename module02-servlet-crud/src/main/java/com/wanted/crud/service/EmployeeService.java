@@ -1,19 +1,18 @@
 package com.wanted.crud.service;
 
-import com.wanted.crud.dao.EmployeeDAO;
+import com.wanted.crud.dao.EnrollmentsDAO;
 import com.wanted.crud.dto.EmployeeDTO;
 
 import java.sql.Connection;
 
 import static com.wanted.crud.global.JDBCTemplate.close;
-import static com.wanted.crud.global.JDBCTemplate.getConnection;
 
 public class EmployeeService {
-    private final EmployeeDAO employeeDAO;
+    private final EnrollmentsDAO employeeDAO;
     private final Connection connection;
     public EmployeeService(Connection connection) {
         this.connection = connection;
-        this.employeeDAO = new EmployeeDAO(connection);
+        this.employeeDAO = new EnrollmentsDAO(connection);
     }
     public int registerEmployee(EmployeeDTO employee) {
         try {
