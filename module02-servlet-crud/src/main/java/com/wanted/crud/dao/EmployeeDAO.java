@@ -8,26 +8,23 @@ import java.sql.SQLException;
 
 public class EmployeeDAO {
 
-    public int deleteEmployee(String empId) {
+    public int deleteEmployee(Connection con, String empId) {
 
-        Connection con = null;
         PreparedStatement pstmt = null;
         int result = 0;
 
-        String sql = "DELETE FROM employee WHERE emp_id = ?";
+        String query = "DELETE FROM employee WHERE EMP_ID = ?";
 
         try {
-            con = JDBCTemplate.getConnection();
-            pstmt = con.prepareStatement(sql);
+            pstmt = con.prepareStatement(query);
             pstmt.setString(1, empId);
 
             result = pstmt.executeUpdate();
 
-        } catch (SQLException e) {
-            throw new RuntimeException("사원 삭제 DAO 오류", e);
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             JDBCTemplate.close(pstmt);
-            JDBCTemplate.close(con);
         }
 
         return result;

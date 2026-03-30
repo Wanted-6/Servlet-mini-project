@@ -372,7 +372,7 @@
                 <p><strong>성공 흐름:</strong> 수정 성공 후 redirect:/employees/detail?empId={empId}</p>
             </div>
 
-            <div class="card" onclick="submitDeleteForm(200)">
+            <div class="card" onclick="submitDeleteForm(201)">
                 <h3>사원 삭제</h3>
                 <p><strong>URL:</strong> POST /employees/delete</p>
                 <p><strong>목적:</strong> 특정 사원 정보를 삭제한다.</p>
