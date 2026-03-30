@@ -10,23 +10,30 @@ public class EmployeeDTO {
     private String EMAIL;
     private String PHONE;
     private String DEPT_CODE;
+    private String DEPT_TITLE;
     private String JOB_CODE;
+    private String JOB_NAME;
     private String SALE_LEVEL;
     private Long SALARY;
     private Double BONUS;
-    private Long  MANAGER_ID;
+    private Long MANAGER_ID;
     private LocalDateTime HIRE_DATE;
     private LocalDate ENT_DATE;
-    private Boolean ENT_YN;
+    private String ENT_YN;
 
-    public EmployeeDTO(Long EMP_ID, String EMP_NAME, String EMP_DOB, String EMAIL, String PHONE, String DEPT_CODE, String JOB_CODE, String SALE_LEVEL, Long SALARY, Double BONUS, Long MANAGER_ID, LocalDateTime HIRE_DATE, LocalDate ENT_DATE, Boolean ENT_YN) {
+    public EmployeeDTO() {
+    }
+
+    public EmployeeDTO(Long EMP_ID, String EMP_NAME, String EMP_DOB, String EMAIL, String PHONE, String DEPT_CODE, String DEPT_TITLE, String JOB_CODE, String JOB_NAME, String SALE_LEVEL, Long SALARY, Double BONUS, Long MANAGER_ID, LocalDateTime HIRE_DATE, LocalDate ENT_DATE, String ENT_YN) {
         this.EMP_ID = EMP_ID;
         this.EMP_NAME = EMP_NAME;
         this.EMP_DOB = EMP_DOB;
         this.EMAIL = EMAIL;
         this.PHONE = PHONE;
         this.DEPT_CODE = DEPT_CODE;
+        this.DEPT_TITLE = DEPT_TITLE;
         this.JOB_CODE = JOB_CODE;
+        this.JOB_NAME = JOB_NAME;
         this.SALE_LEVEL = SALE_LEVEL;
         this.SALARY = SALARY;
         this.BONUS = BONUS;
@@ -84,12 +91,28 @@ public class EmployeeDTO {
         this.DEPT_CODE = DEPT_CODE;
     }
 
+    public String getDEPT_TITLE() {
+        return DEPT_TITLE;
+    }
+
+    public void setDEPT_TITLE(String DEPT_TITLE) {
+        this.DEPT_TITLE = DEPT_TITLE;
+    }
+
     public String getJOB_CODE() {
         return JOB_CODE;
     }
 
     public void setJOB_CODE(String JOB_CODE) {
         this.JOB_CODE = JOB_CODE;
+    }
+
+    public String getJOB_NAME() {
+        return JOB_NAME;
+    }
+
+    public void setJOB_NAME(String JOB_NAME) {
+        this.JOB_NAME = JOB_NAME;
     }
 
     public String getSALE_LEVEL() {
@@ -140,11 +163,11 @@ public class EmployeeDTO {
         this.ENT_DATE = ENT_DATE;
     }
 
-    public Boolean getENT_YN() {
+    public String getENT_YN() {
         return ENT_YN;
     }
 
-    public void setENT_YN(Boolean ENT_YN) {
+    public void setENT_YN(String ENT_YN) {
         this.ENT_YN = ENT_YN;
     }
 
@@ -157,17 +180,16 @@ public class EmployeeDTO {
                 ", EMAIL='" + EMAIL + '\'' +
                 ", PHONE='" + PHONE + '\'' +
                 ", DEPT_CODE='" + DEPT_CODE + '\'' +
+                ", DEPT_TITLE='" + DEPT_TITLE + '\'' +
                 ", JOB_CODE='" + JOB_CODE + '\'' +
+                ", JOB_NAME='" + JOB_NAME + '\'' +
                 ", SALE_LEVEL='" + SALE_LEVEL + '\'' +
                 ", SALARY=" + SALARY +
                 ", BONUS=" + BONUS +
                 ", MANAGER_ID=" + MANAGER_ID +
                 ", HIRE_DATE=" + HIRE_DATE +
                 ", ENT_DATE=" + ENT_DATE +
-                ", ENT_YN=" + ENT_YN +
+                ", ENT_YN='" + ENT_YN + '\'' +
                 '}';
-    }
-
-    public EmployeeDTO() {
     }
 }
