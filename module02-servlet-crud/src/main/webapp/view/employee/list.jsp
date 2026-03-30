@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>사원 목록</title>
 </head>
 <body>
-
+<h1>사원 목록 페이지 이동 성공</h1>
 </body>
 </html>

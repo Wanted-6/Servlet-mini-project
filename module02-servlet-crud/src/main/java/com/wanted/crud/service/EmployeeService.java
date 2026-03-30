@@ -1,9 +1,12 @@
 package com.wanted.crud.service;
 
 import com.wanted.crud.dao.EmployeeDAO;
-import com.wanted.crud.dto.EmployeeDTO;
+import com.wanted.crud.global.JDBCTemplate;
 
 import java.sql.Connection;
+import com.wanted.crud.dto.EmployeeDTO;
+
+
 
 import static com.wanted.crud.global.JDBCTemplate.close;
 import static com.wanted.crud.global.JDBCTemplate.getConnection;
@@ -45,8 +48,17 @@ public class EmployeeService {
             throw new IllegalArgumentException("사원명은 필수입니다.");
         }
 
+    public int deleteEmployee(String empId) {
+        Connection con = JDBCTemplate.getConnection();
+
+        int result = employeeDAO.deleteEmployee(con, empId);
+
+        JDBCTemplate.close(con);
+
+        return result;
+    }
         if (employee.getJOB_CODE() == null || employee.getJOB_CODE().isBlank()) {
             throw new IllegalArgumentException("직급코드는 필수입니다.");
         }
     }
-}
+

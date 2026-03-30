@@ -12,6 +12,16 @@ import java.sql.Date;
 public class EmployeeDAO {
     private final Connection connection;
 
+    public int deleteEmployee(Connection con, String empId) {
+
+        PreparedStatement pstmt = null;
+        int result = 0;
+
+        String query = "DELETE FROM employee WHERE EMP_ID = ?";
+
+        try {
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, empId);
     public EmployeeDAO(Connection connection) {this.connection = connection;}
 
     public int insertEmployee(Connection conn, EmployeeDTO employee) {
@@ -83,6 +93,10 @@ public class EmployeeDAO {
 
             return pstmt.executeUpdate();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplate.close(pstmt);
         } catch (SQLException e) {
             throw new RuntimeException("사원 등록 DAO 처리 중 오류 발생", e);
         }
