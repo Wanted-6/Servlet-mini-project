@@ -10,7 +10,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDAO {
+public class EmployeeSelectDAO {
 
     public List<EmployeeDTO> selectAllEmployees(Connection con) {
 

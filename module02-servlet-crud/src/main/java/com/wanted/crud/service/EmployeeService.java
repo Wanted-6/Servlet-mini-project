@@ -1,6 +1,6 @@
 package com.wanted.crud.service;
 
-import com.wanted.crud.dao.EmployeeDAO;
+import com.wanted.crud.dao.EmployeeSelectDAO;
 import com.wanted.crud.dto.EmployeeDTO;
 import com.wanted.crud.global.JDBCTemplate;
 
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class EmployeeService {
 
-    private final EmployeeDAO employeeDAO = new EmployeeDAO();
+    private final EmployeeSelectDAO employeeDAO = new EmployeeSelectDAO();
 
     public List<EmployeeDTO> selectAllEmployees() {
         Connection con = JDBCTemplate.getConnection();
