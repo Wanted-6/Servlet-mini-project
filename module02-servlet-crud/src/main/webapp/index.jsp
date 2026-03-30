@@ -225,6 +225,21 @@
         function needPostMessage(featureName) {
             alert(featureName + " 기능은 화면에서 직접 GET으로 이동하는 기능이 아니라, form을 이용한 POST 요청 처리 중심으로 실습합니다.");
         }
+        function submitDeleteForm(empId) {
+            const isLogin = <%= isLogin %>;
+
+            if (!isLogin) {
+                alert("로그인 후 이용 가능한 기능입니다.");
+                return;
+            }
+
+            if (!confirm("정말 삭제하시겠습니까?")) {
+                return;
+            }
+
+            document.getElementById("deleteEmpId").value = empId;
+            document.getElementById("deleteForm").submit();
+        }
     </script>
 </head>
 <body>
@@ -357,7 +372,7 @@
                 <p><strong>성공 흐름:</strong> 수정 성공 후 redirect:/employees/detail?empId={empId}</p>
             </div>
 
-            <div class="card" onclick="needPostMessage('사원 삭제')">
+            <div class="card" onclick="submitDeleteForm(200)">
                 <h3>사원 삭제</h3>
                 <p><strong>URL:</strong> POST /employees/delete</p>
                 <p><strong>목적:</strong> 특정 사원 정보를 삭제한다.</p>
@@ -366,6 +381,10 @@
                 <p><strong>주의사항:</strong> 삭제는 GET으로 처리하지 않고 반드시 POST로 처리한다.</p>
                 <p><strong>성공 흐름:</strong> 삭제 성공 후 redirect:/employees</p>
             </div>
+
+            <form id="deleteForm" action="<%= contextPath %>/employees/delete" method="post">
+                <input type="hidden" name="empId" id="deleteEmpId">
+            </form>
 
             <div class="card static-card">
                 <h3>로그인 / 로그아웃</h3>
