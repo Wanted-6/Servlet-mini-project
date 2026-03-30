@@ -24,4 +24,16 @@ public class LoginFilter implements Filter {
             chain.doFilter(request, response);
         }
     }
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        System.out.println("login filter 초기화 됨...");
+    }
+
+    @Override
+    public void destroy() {
+        System.out.println("login filter 파괴됨..");
+    }
 }
+
+
