@@ -1,32 +1,59 @@
 package com.wanted.crud.service;
 
-import com.wanted.crud.dao.MinSeoDAO;
+import com.wanted.crud.dao.EmployeeDAO;
+import com.wanted.crud.dto.EmployeeDTO;
 import com.wanted.crud.global.JDBCTemplate;
 
 import java.sql.Connection;
-import com.wanted.crud.dto.EmployeeDTO;
-
-
-
-import static com.wanted.crud.global.JDBCTemplate.close;
 
 public class EmployeeService {
-    private final MinSeoDAO minSeoDAO;
-    private final Connection connection;
 
-    public EmployeeService(Connection connection) {
-        this.connection = connection;
-        this.minSeoDAO = new MinSeoDAO(connection);
+    private final EmployeeDAO employeeDAO = new EmployeeDAO();
+
+    public int registerEmployee(EmployeeDTO employee) {
+        Connection connection = JDBCTemplate.getConnection();
+
+        try {
+            validate(employee);
+
+            if (employeeDAO.existsByEmpNo(connection, employee.getEMP_NO())) {
+                throw new IllegalArgumentException("이미 존재하는 사번입니다.");
+            }
+
+            int result = employeeDAO.insertEmployee(connection, employee);
+
+            if (result <= 0) {
+                throw new RuntimeException("사원 등록에 실패했습니다.");
+            }
+
+            return result;
+
+        } finally {
+            JDBCTemplate.close(connection);
+        }
     }
 
     public int deleteEmployee(String empId) {
-        Connection con = JDBCTemplate.getConnection();
+        Connection connection = JDBCTemplate.getConnection();
 
-        int result = minSeoDAO.deleteEmployee(con, empId);
+        try {
+            return employeeDAO.deleteEmployee(connection, empId);
+        } finally {
+            JDBCTemplate.close(connection);
+        }
+    }
 
-        JDBCTemplate.close(con);
+    private void validate(EmployeeDTO employee) {
+        if (employee.getEMP_NO() == null || employee.getEMP_NO().isBlank()) {
+            throw new IllegalArgumentException("사번은 필수입니다.");
+        }
 
-        return result;
+        if (employee.getEMP_NAME() == null || employee.getEMP_NAME().isBlank()) {
+            throw new IllegalArgumentException("사원명은 필수입니다.");
+        }
+
+        if (employee.getJOB_CODE() == null || employee.getJOB_CODE().isBlank()) {
+            throw new IllegalArgumentException("직급코드는 필수입니다.");
+        }
     }
 }
-
