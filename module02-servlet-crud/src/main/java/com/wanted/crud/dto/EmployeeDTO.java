@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 public class EmployeeDTO {
     private Long EMP_ID;
     private String EMP_NAME;
-    private String EMP_DOB;
+    private String EMP_NO;
     private String EMAIL;
     private String PHONE;
     private String DEPT_CODE;
@@ -22,7 +22,7 @@ public class EmployeeDTO {
     public EmployeeDTO(Long EMP_ID, String EMP_NAME, String EMP_DOB, String EMAIL, String PHONE, String DEPT_CODE, String JOB_CODE, String SALE_LEVEL, Long SALARY, Double BONUS, Long MANAGER_ID, LocalDateTime HIRE_DATE, LocalDate ENT_DATE, Boolean ENT_YN) {
         this.EMP_ID = EMP_ID;
         this.EMP_NAME = EMP_NAME;
-        this.EMP_DOB = EMP_DOB;
+        this.EMP_NO = EMP_NO;
         this.EMAIL = EMAIL;
         this.PHONE = PHONE;
         this.DEPT_CODE = DEPT_CODE;
@@ -52,12 +52,12 @@ public class EmployeeDTO {
         this.EMP_NAME = EMP_NAME;
     }
 
-    public String getEMP_DOB() {
-        return EMP_DOB;
+    public String getEMP_NO() {
+        return EMP_NO;
     }
 
-    public void setEMP_DOB(String EMP_DOB) {
-        this.EMP_DOB = EMP_DOB;
+    public void setEMP_NO(String EMP_NO) {
+        this.EMP_NO = EMP_NO;
     }
 
     public String getEMAIL() {
@@ -153,7 +153,7 @@ public class EmployeeDTO {
         return "EmployeeDTO{" +
                 "EMP_ID=" + EMP_ID +
                 ", EMP_NAME='" + EMP_NAME + '\'' +
-                ", EMP_DOB='" + EMP_DOB + '\'' +
+                ", EMP_NO='" + EMP_NO + '\'' +
                 ", EMAIL='" + EMAIL + '\'' +
                 ", PHONE='" + PHONE + '\'' +
                 ", DEPT_CODE='" + DEPT_CODE + '\'' +
@@ -170,4 +170,5 @@ public class EmployeeDTO {
 
     public EmployeeDTO() {
     }
+
 }
