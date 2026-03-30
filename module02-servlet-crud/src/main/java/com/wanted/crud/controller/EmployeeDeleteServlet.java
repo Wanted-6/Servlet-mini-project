@@ -36,7 +36,8 @@ public class EmployeeDeleteServlet extends HttpServlet {
         } catch (Exception e) {
             req.setAttribute("message", "사원 삭제 중 오류가 발생했습니다.");
             req.setAttribute("exception", e);
-            req.getRequestDispatcher("/errorpage.jsp").forward(req, resp);
+            req.getRequestDispatcher("/view/common/errorpage.jsp").forward(req, resp);
+            /// ////////////////////////////
         }
     }
 }
